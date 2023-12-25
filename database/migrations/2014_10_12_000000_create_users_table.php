@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id(); // This assumes you want an auto-incrementing primary key 'id'
-            $table->enum('role',['admin','member','genie','guru'])->default('member');
+            $table->unsignedBigInteger('role_id')->default(2);
+            // $table->enum('role',['admin','member','genie','guru'])->default('member');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\genie;
 
-use Illuminate\Http\Request;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\EducationQualification;
+use Illuminate\Support\Facades\Validator;
 
-class AdminController extends Controller
+class GenieController extends Controller
 {
     public function index()
     {
-        return view('admin.admin_dashboard');
+        return view('genie_dashboard.dashboard');
     }
 
     public function logout()
@@ -19,4 +22,5 @@ class AdminController extends Controller
         return redirect('/login'); // Redirect to the desired route after logout
         // return redirect()->route('career.genie.login'); // Redirect to the desired route after logout
     }
+
 }

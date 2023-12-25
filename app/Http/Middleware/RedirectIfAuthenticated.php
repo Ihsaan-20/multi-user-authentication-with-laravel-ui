@@ -1,8 +1,6 @@
 <?php
-
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,15 +19,15 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                if(Auth()->user()->role === 'admin')
-                {
-                    return redirect()->route('auth.home');
+                if (Auth::user()->role_id === 1) {
+                    return redirect()->route('admin.dashboard');
+                } elseif (Auth::user()->role_id === 2) {
+                    return redirect()->route('member.dashboard');
+                } elseif (Auth::user()->role_id === 4) {
+                    return redirect()->route('genie.dashboard');
+                } elseif (Auth::user()->role_id === 3) {
+                    return redirect()->route('guru.dashboard');
                 }
-                elseif(Auth()->user()->role === 'member')
-                {
-                    return redirect()->route('member.home');
-                }
-                // return redirect(RouteServiceProvider::HOME);
             }
         }
 

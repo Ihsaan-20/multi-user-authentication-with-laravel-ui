@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class Guru
@@ -15,11 +16,11 @@ class Guru
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->check()){
-            if(auth()->user()->role === 'guru')
-            {
+        if (Auth::check() && Auth::user()->role_id === 3) {
             return $next($request);
-            }
         }
+
+        return redirect('/login'); // Redirect to a suitable route for unauthorized users
+        // return redirect()->route('career.genie.login'); // Redirect to a suitable route for unauthorized users
     }
 }
